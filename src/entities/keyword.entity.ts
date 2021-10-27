@@ -1,7 +1,8 @@
 import { IsString } from 'class-validator';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { CategoryEntity } from './category.entity';
+import { SentenceEntity } from './sentence.entity';
 import { SentencePartEntity } from './sentencePart.entity';
 
 @Entity('keywords')
@@ -19,4 +20,9 @@ export class KeywordEntity extends AbstractEntity {
     eager: true,
   })
   category: CategoryEntity;
+
+  @ManyToMany((type) => SentenceEntity, (sentence) => sentence.keywords, {
+    eager: true
+  })
+  sentences: SentenceEntity[];
 }
