@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { OptionalAuthGuard } from 'src/auth/optional-auth.guard';
 import { User } from 'src/auth/user.decorator';
 import { UserEntity } from 'src/entities/user.entity';
+import { CreateKeywordDTO, UpdatekeywordDTO } from 'src/models/keyword.dto';
 import { UpdateUserDTO } from 'src/models/user.model';
 import { KeywordsService } from 'src/user/keywords/keywords.service';
 
@@ -32,17 +33,20 @@ export class KeywordsController {
     @UseGuards(AuthGuard())
     async findKeyword(@Body('keyword', ValidationPipe) data: string) {
         const res = await this.keywordsService.findKeyword(data) // if not found, returns error. If found, returns keyword
+        return res
     }
     
     @Put(':slug')
     @UseGuards(AuthGuard())
-    async updateKeyword(@User() user: UserEntity, @Param() slug: string) {
+    async updateKeyword(@User() user: UserEntity, @Param() slug: string, @Body('keyword') data: UpdatekeywordDTO) {
         const keyword = await this.keywordsService.updateKeyword(slug, user)
+        return keyword
     }
 
     @Delete(':slug')
     @UseGuards(AuthGuard())
     async deleteKeyword(@User() user: UserEntity, @Param() slug: string) {
         const keyword = await this.keywordsService.deleteKeyword(slug, user)
+        return keyword
     }
 } 
