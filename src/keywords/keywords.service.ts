@@ -55,8 +55,8 @@ export class KeywordsService {
         return keyword
     }
 
-    async updateKeyword(data: UpdateKeywordDTO) {
-
+    async updateKeyword(data: UpdateKeywordDTO, user: UserEntity) {
+        //Only option to delete and recreate because category/sentence part can change? 
     }
 
     async deleteKeyword(data: string, user: UserEntity) {

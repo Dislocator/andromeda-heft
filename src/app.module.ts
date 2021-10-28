@@ -6,6 +6,7 @@ import { DatabaseConnectionService } from './database-connection.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { KeywordsModule } from './keywords/keywords.module';
+import { SentencesModule } from './sentences/sentences.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { KeywordsModule } from './keywords/keywords.module';
     AuthModule,
     UserModule,
     KeywordsModule,
+    SentencesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
