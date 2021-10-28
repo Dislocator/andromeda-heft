@@ -4,7 +4,7 @@ import { KeywordEntity } from './keyword.entity';
 import { SentencePartEntity } from './sentencePart.entity';
 
 @Entity('sentenseTemplate')
-export class SentenceTemplates extends AbstractEntity {
+export class SentenceTemplate extends AbstractEntity {
     @ManyToOne((type) => SentencePartEntity, (part) => part.templates)
     sentenceParts: SentencePartEntity[];
 }

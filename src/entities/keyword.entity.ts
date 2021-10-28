@@ -4,10 +4,11 @@ import { AbstractEntity } from './abstract-entity';
 import { CategoryEntity } from './category.entity';
 import { SentenceEntity } from './sentence.entity';
 import { SentencePartEntity } from './sentencePart.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('keywords')
 export class KeywordEntity extends AbstractEntity {
-  @Column({ unique: true })
+  @Column()
   @IsString()
   word: string;
 
@@ -24,5 +25,8 @@ export class KeywordEntity extends AbstractEntity {
   @ManyToMany((type) => SentenceEntity, (sentence) => sentence.keywords, {
     eager: true
   })
+  @ManyToMany((type) => UserEntity)
+  users: UserEntity[];
+
   sentences: SentenceEntity[];
 }

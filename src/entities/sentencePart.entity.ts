@@ -14,6 +14,7 @@ export class SentencePartEntity extends AbstractEntity {
   @Column({
     type: 'enum',
     enum: SentenceParts,
+    default: SentenceParts.WHAT,
   })
   name: SentenceParts;
 
