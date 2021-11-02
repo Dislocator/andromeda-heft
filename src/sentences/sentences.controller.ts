@@ -19,14 +19,14 @@ export class SentencesController {
         return sentences
     }
 
-    @Get('/generate')
+    @Get('/add')
     @UseGuards(AuthGuard()) 
     async generateSentences(@User() user: UserEntity) {
         const sentences = await this.sentencesService.generateSentences(user)
         return sentences
     }
 
-    @Post('/generate')
+    @Post('/add')
     @UseGuards(AuthGuard())
     async generateSentence(@User() user: UserEntity, @Body('keyword', ValidationPipe) keyword: string) {
         const sentence = await this.sentencesService.generateSentence(user, keyword)

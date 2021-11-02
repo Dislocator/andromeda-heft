@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { KeywordsModule } from './keywords/keywords.module';
 import { SentencesModule } from './sentences/sentences.module';
+import { SentencePartsModule } from './sentence-parts/sentence-parts.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SentencesModule } from './sentences/sentences.module';
     UserModule,
     KeywordsModule,
     SentencesModule,
+    SentencePartsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

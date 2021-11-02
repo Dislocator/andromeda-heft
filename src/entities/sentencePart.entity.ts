@@ -12,11 +12,8 @@ export enum SentenceParts {
 
 @Entity('sentenceParts')
 export class SentencePartEntity extends AbstractEntity {
-  @Column({
-    type: 'enum',
-    enum: SentenceParts,
-  })
-  name: SentenceParts;
+  @Column({unique: true})
+  name: string;
 
   @OneToMany((type) => SentenceTemplateEntity, (template) => template.sentenceParts)
   templates: SentenceTemplateEntity[];
