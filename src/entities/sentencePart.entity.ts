@@ -1,7 +1,7 @@
-import { Column, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
-import { SentenceTemplate } from './sentenceTemplate.entity';
+import {  SentenceTemplateEntity } from './sentenceTemplate.entity';
 
 export enum SentenceParts {
   WHAT = 'what',
@@ -10,6 +10,7 @@ export enum SentenceParts {
   // TODO: change to appropriate parts
 }
 
+@Entity('sentenceParts')
 export class SentencePartEntity extends AbstractEntity {
   @Column({
     type: 'enum',
@@ -17,8 +18,8 @@ export class SentencePartEntity extends AbstractEntity {
   })
   name: SentenceParts;
 
-  @OneToMany((type) => SentenceTemplate, (template) => template.sentenceParts)
-  templates: SentenceTemplate[];
+  @OneToMany((type) => SentenceTemplateEntity, (template) => template.sentenceParts)
+  templates: SentenceTemplateEntity[];
 
   @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart)
   keywords: KeywordEntity[];

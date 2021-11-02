@@ -1,4 +1,5 @@
 import {
+  IsDate,
   IsEmail,
   IsOptional,
   IsString,
@@ -29,10 +30,44 @@ export class RegisterDTO extends LoginDTO {
   lastName: string;
 }
 
+export class UserInfoDTO {
+  @IsString()
+  firstName: string
+  @IsString()
+  lastName: string
+  @IsString()
+  profession: string
+  @IsString()
+  company: string
+  @IsString()
+  chiefName: string
+  @IsDate()
+  learningStartDate: Date
+  @IsDate()
+  learningFinishDate: Date
+}
 export class UpdateUserDTO {
-  @IsEmail()
+  @IsString()
   @IsOptional()
-  email: string;
+    firstName: string
+    @IsString()
+    @IsOptional()
+    lastName: string
+    @IsString()
+    @IsOptional()
+    profession: string
+    @IsString()
+    @IsOptional()
+    company: string
+    @IsString()
+    @IsOptional()
+    chiefName: string
+    @IsDate()
+    @IsOptional()
+    learningStartDate: Date
+    @IsDate()
+    @IsOptional()
+    learningFinishDate: Date
 }
 
 export interface AuthPayload {
