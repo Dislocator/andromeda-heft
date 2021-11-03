@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
+import { AuthService } from 'src/auth/auth.service';
 import { CategoryEntity } from 'src/entities/category.entity';
 import { KeywordEntity } from 'src/entities/keyword.entity';
 import { SentenceEntity } from 'src/entities/sentence.entity';

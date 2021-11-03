@@ -14,18 +14,18 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
+    @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>,
     private jwtService: JwtService,
   ) {}
 
   async register(credentials: RegisterDTO) {
     try {
-      const user = this.userRepository.create(credentials);
-      user.save;
+      const user = await this.userRepository.create(credentials);
+      await user.save();
+      console.log(await this.userRepository.find(), "users");
       const payload = { email: user.email };
       const token = this.jwtService.sign(payload);
-      return { user: { ...user.toJSON(), token } };
+      return {...user.toJSON(), token };
     } catch (err) {
       if (err.code === '23505') {
         throw new ConflictException('username already taken');
@@ -36,15 +36,18 @@ export class AuthService {
 
   async login({ email, password }: LoginDTO) {
     try {
+      console.log(await this.userRepository.find(), "users");
       const user = await this.userRepository.findOne({ where: { email } });
+      console.log(user)
       const isValid = await user.comparePassword(password);
-      if (user && isValid) {
-        const payload = { email: user.email };
-        const token = this.jwtService.sign(payload);
-        return { user: { ...user.toJSON(), token } };
-      } else {
+      if (!isValid) {
         throw new UnauthorizedException('Invalid credentials');
-      }
+      } 
+        
+                const payload = { email: user.email };
+                const token = this.jwtService.sign(payload);
+                return { ...user.toJSON(), token };
+      
     } catch (err) {
       throw new UnauthorizedException('Invalid credentials');
     }

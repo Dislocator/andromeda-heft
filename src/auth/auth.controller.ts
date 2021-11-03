@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post()
+  @Post('/register')
   register(@Body(ValidationPipe) credentials: RegisterDTO) {
     return this.authService.register(credentials);
   }

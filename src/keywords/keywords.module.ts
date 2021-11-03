@@ -11,10 +11,10 @@ import { AuthModule } from 'src/auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-KeywordEntity,
-UserEntity,
-CategoryEntity,
-SentencePartEntity,
+      KeywordEntity,
+      UserEntity,
+      CategoryEntity,
+      SentencePartEntity,
     ]), AuthModule
   ],
   providers: [KeywordsService],

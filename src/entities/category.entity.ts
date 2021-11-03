@@ -14,7 +14,7 @@ export enum Categories {
 @Entity('category')
 export class CategoryEntity extends AbstractEntity {
   @Column({ type: 'enum', enum: Categories })
-  category: Categories;
+  name: Categories;
 
   @OneToMany((type) => SentenceEntity, (sentence) => sentence.category)
   sentences: SentenceEntity[];

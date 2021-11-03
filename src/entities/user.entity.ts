@@ -17,16 +17,16 @@ export class UserEntity extends AbstractEntity {
   @Column()
   lastName: string;
 
-  @Column()
-  profession: string
-  @Column()
-  company: string
-  @Column()
-  chiefName: string
-  @Column()
-  learningStartDate: Date
-  @Column()
-  learningFinishDate: Date
+  // @Column()
+  // profession: string
+  // @Column()
+  // company: string
+  // @Column()
+  // chiefName: string
+  // @Column()
+  // learningStartDate: Date
+  // @Column()
+  // learningFinishDate: Date
   @Column()
   @Exclude()
   password: string;

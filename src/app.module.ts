@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { KeywordsModule } from './keywords/keywords.module';
 import { SentencesModule } from './sentences/sentences.module';
 import { SentencePartsModule } from './sentence-parts/sentence-parts.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SentencePartsModule } from './sentence-parts/sentence-parts.module';
     KeywordsModule,
     SentencesModule,
     SentencePartsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
