@@ -17,8 +17,10 @@ export class KeywordsService {
     @InjectRepository(SentencePartEntity) private sentencePartRepository: Repository<SentencePartEntity>,
 ) {}
     async findAll(user: UserEntity) {
-        const keywords = await this.userRepository.find({where: {id: user.id}, relations: ['keywords']})
-        return keywords
+        console.log(user)
+        const keywords = await this.keywordsRepository.find({where: {id: user.id}, relations: ['users']})
+        const users = await this.userRepository.find()
+        return users
     }
 
     async addKeyword(user: UserEntity, data:CreateKeywordDTO) {
@@ -35,12 +37,12 @@ export class KeywordsService {
             throw new NotFoundException("SentencePart not found")
 
         }
-        
+        console.log(keyword)
+        keyword.users = [user]
         keyword.sentencePart = sentencePart
-        user.keywords.push(keyword)
-        user.save()
-        keyword.save()
-
+        console.log(keyword, "keyword")
+        console.log(await this.keywordsRepository.find(), "after save")
+        await keyword.save()
         return keyword
     }
 
@@ -60,15 +62,15 @@ export class KeywordsService {
     }
 
     async deleteKeyword(data: string, user: UserEntity) {
-        const keyword = await this.keywordsRepository.findOne({where: {word: data.toLowerCase()}})
-        if (keyword === undefined) {
-            throw new NotFoundException("Keyword not found")
-        }
-        const index = user.keywords.indexOf(keyword)
-        if (index !== -1) {
-            user.keywords.splice(index, 1)
-        }
-        user.save()
-        return keyword
+        // const keyword = await this.keywordsRepository.findOne({where: {word: data.toLowerCase()}})
+        // if (keyword === undefined) {
+        //     throw new NotFoundException("Keyword not found")
+        // }
+        // const index = user.keywords.indexOf(keyword)
+        // if (index !== -1) {
+        //     user.keywords.splice(index, 1)
+        // }
+        // user.save()
+        // return keyword
     }
 }

@@ -26,6 +26,7 @@ export class SentencesService {
 
     async generateSentences(user: UserEntity) {
         try {
+            console.log("user",user)
             const keywords = user.keywords
             let sentence : SentenceEntity
             this.sentenceRepository.create(sentence)

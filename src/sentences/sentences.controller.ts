@@ -18,7 +18,9 @@ export class SentencesController {
         const sentences = await this.sentencesService.findAll(user);
         return sentences
     }
-
+    /* 
+    generates sentence for all keywords from current user
+    */
     @Get('/add')
     @UseGuards(AuthGuard()) 
     async generateSentences(@User() user: UserEntity) {

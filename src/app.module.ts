@@ -9,6 +9,7 @@ import { KeywordsModule } from './keywords/keywords.module';
 import { SentencesModule } from './sentences/sentences.module';
 import { SentencePartsModule } from './sentence-parts/sentence-parts.module';
 import { CategoriesModule } from './categories/categories.module';
+import { SentenceTemplateModule } from './sentence-template/sentence-template.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CategoriesModule } from './categories/categories.module';
     SentencesModule,
     SentencePartsModule,
     CategoriesModule,
+    SentenceTemplateModule,
   ],
   controllers: [AppController],
   providers: [AppService],

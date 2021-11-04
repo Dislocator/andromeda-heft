@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
 import {  SentenceTemplateEntity } from './sentenceTemplate.entity';
@@ -18,6 +18,6 @@ export class SentencePartEntity extends AbstractEntity {
   @OneToMany((type) => SentenceTemplateEntity, (template) => template.sentenceParts)
   templates: SentenceTemplateEntity[];
 
-  @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart)
+  @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart, {eager: true})
   keywords: KeywordEntity[];
 }

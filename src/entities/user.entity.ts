@@ -1,6 +1,6 @@
 import { classToPlain, Exclude } from 'class-transformer';
 import { IsEmail } from 'class-validator';
-import { BaseEntity, BeforeInsert, Column, Entity, ManyToMany } from 'typeorm';
+import { BaseEntity, BeforeInsert, Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
@@ -30,11 +30,12 @@ export class UserEntity extends AbstractEntity {
   @Column()
   @Exclude()
   password: string;
-
-  @ManyToMany((type) => KeywordEntity)
+  @ManyToMany((type) => KeywordEntity, (keyword) => keyword.users,{
+    eager: true
+  }) 
   keywords: KeywordEntity[];
 
-  @ManyToMany((type) => SentenceEntity, (sentence) => sentence.users)
+  @ManyToMany((type) => SentenceEntity, (sentence) => sentence.users, {eager: true})
   sentences: SentenceEntity[];
 
   @BeforeInsert()

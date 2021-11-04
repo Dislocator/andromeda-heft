@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { CategoryEntity } from './category.entity';
 import { KeywordEntity } from './keyword.entity';
@@ -10,10 +10,13 @@ export class SentenceEntity extends AbstractEntity {
   })
   category: CategoryEntity;
 
-  @ManyToMany((type) => KeywordEntity, (keyword) => keyword.sentences)
+  @ManyToMany((type) => KeywordEntity, (keyword) => keyword.sentences, {
+    eager: true
+  })
   keywords: KeywordEntity[];
 
   @ManyToMany((type) => UserEntity, (user) => user.sentences)
+  @JoinTable()
   users: UserEntity[];
 
 }
