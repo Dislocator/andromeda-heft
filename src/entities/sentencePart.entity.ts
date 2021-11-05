@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
 import {  SentenceTemplateEntity } from './sentenceTemplate.entity';
@@ -15,7 +15,8 @@ export class SentencePartEntity extends AbstractEntity {
   @Column({unique: true})
   name: string;
 
-  @OneToMany((type) => SentenceTemplateEntity, (template) => template.sentenceParts)
+  @ManyToMany((type) => SentenceTemplateEntity, (template) => template.sentenceParts)
+  @JoinTable()
   templates: SentenceTemplateEntity[];
 
   @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart, {eager: true})

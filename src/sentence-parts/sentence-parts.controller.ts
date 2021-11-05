@@ -6,16 +6,16 @@ import { SentencePartsService } from './sentence-parts.service';
 @Controller('sentence-parts')
 export class SentencePartsController {
     constructor(private sentencePartsService: SentencePartsService){}
-
+    //TODO: Add so that only admin cann access this controllers endpoints
     @Get()
-    @UseGuards(AuthGuard())
+    // @UseGuards(AuthGuard())
     async findAll() {
         const sentenceParts = await this.sentencePartsService.findAll();
         return sentenceParts
     }
 
     @Post('add')
-    @UseGuards(AuthGuard())
+    // @UseGuards(AuthGuard())
     async addSentencePart(@Body('sentence-part', ValidationPipe) data: SentencePartDTO) {
         const sentencePart = await this.sentencePartsService.addSentencePart(data)
         return sentencePart
