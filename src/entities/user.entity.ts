@@ -5,6 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
 import { SentenceEntity } from './sentence.entity';
+import { LessonEntity } from './lesson.entity';
 @Entity('user')
 export class UserEntity extends AbstractEntity {
   @Column({ unique: true })
@@ -37,6 +38,9 @@ export class UserEntity extends AbstractEntity {
 
   @ManyToMany((type) => SentenceEntity, (sentence) => sentence.users, {eager: true})
   sentences: SentenceEntity[];
+  
+  @ManyToMany((type) => LessonEntity, (lesson) => lesson.users, {eager: true})
+  lessons: LessonEntity[];
 
   @BeforeInsert()
   async hashPassword() {

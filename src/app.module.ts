@@ -10,6 +10,8 @@ import { SentencesModule } from './sentences/sentences.module';
 import { SentencePartsModule } from './sentence-parts/sentence-parts.module';
 import { CategoriesModule } from './categories/categories.module';
 import { SentenceTemplateModule } from './sentence-template/sentence-template.module';
+import { GoogleDocsConnectionModule } from './google-docs-connection/google-docs-connection.module';
+import { LessonsModule } from './lessons/lessons.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { SentenceTemplateModule } from './sentence-template/sentence-template.mo
     SentencePartsModule,
     CategoriesModule,
     SentenceTemplateModule,
+    GoogleDocsConnectionModule,
+    LessonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

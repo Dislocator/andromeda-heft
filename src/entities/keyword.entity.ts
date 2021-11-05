@@ -2,6 +2,7 @@ import { IsString } from 'class-validator';
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { CategoryEntity } from './category.entity';
+import { LessonEntity } from './lesson.entity';
 import { SentenceEntity } from './sentence.entity';
 import { SentencePartEntity } from './sentencePart.entity';
 import { UserEntity } from './user.entity';
@@ -21,7 +22,11 @@ export class KeywordEntity extends AbstractEntity {
   @ManyToMany((type) => SentenceEntity, (sentence) => sentence.keywords)
   @JoinTable()
   sentences: SentenceEntity[];
+  
   @ManyToMany((type) => UserEntity, (user) => user.keywords, )
   @JoinTable()
   users: UserEntity[];
+
+  @ManyToMany((type) => LessonEntity, (lesson) => lesson.keywords)
+  lessons: LessonEntity[];
 }

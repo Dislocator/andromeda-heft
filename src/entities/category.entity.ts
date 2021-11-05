@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { KeywordEntity } from './keyword.entity';
+import { LessonEntity } from './lesson.entity';
 import { SentenceEntity } from './sentence.entity';
 
 export enum Categories {
@@ -21,4 +22,7 @@ export class CategoryEntity extends AbstractEntity {
 
   @OneToMany((type) => KeywordEntity, (keyword) => keyword.category,{eager: true})
   keywords: KeywordEntity[];
+
+  @ManyToMany((type) => LessonEntity, (lesson) => lesson.categories)
+  lessons: LessonEntity[];
 }

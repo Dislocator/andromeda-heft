@@ -20,7 +20,7 @@ export class SentencesService {
     returns a list of all sentences for the current user
     */   
     async findAll(user: UserEntity) {
-        const sentences = await this.userRepository.find({where: {ide: user.id}, relations: ['sentences']})
+        const sentences = await this.userRepository.find({where: {id: user.id}, relations: ['sentences']})
         return sentences
     }
 
@@ -70,6 +70,7 @@ export class SentencesService {
                 for(const sentencePart of randomTemplate.sentenceParts) {
                     if ( sentencePart.name === keyword.sentencePart.name && !foundSame) {
                         foundSame = true
+                        sentence.keywords.push(keyword)
                         continue
                     }
                     const keywords = await this.keywordsRepository.find({where: {sentencePart: sentencePart}}) 
