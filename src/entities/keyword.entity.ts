@@ -12,7 +12,7 @@ export class KeywordEntity extends AbstractEntity {
   @IsString()
   word: string;
 
-  @ManyToOne((type) => SentencePartEntity, (sentence) => sentence.keywords)
+  @ManyToOne((type) => SentencePartEntity, (sentence) => sentence.keywords, {eager: true})
   sentencePart: SentencePartEntity;
 
   @ManyToOne((type) => CategoryEntity, (category) => category.keywords)

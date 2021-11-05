@@ -31,7 +31,7 @@ export class SentencesService {
             let sentence : SentenceEntity
             this.sentenceRepository.create(sentence)
             for (const keyword of keywords) {                
-                this.generateSentenceHelper(user, keyword)
+                await this.generateSentenceHelper(user, keyword)
             }
         } catch (error) {
             throw new InternalServerErrorException(error)
@@ -48,24 +48,41 @@ export class SentencesService {
         }
     }
     private async generateSentenceHelper(user: UserEntity, keyword: KeywordEntity) {
-        let sentence : SentenceEntity
+        let sentence = this.sentenceRepository.create()
+        sentence.keywords = []
         const templates = (await this.sentenceTemplateRepository.find())
-                const filteredTemplates = templates.filter((sentence) => sentence.sentenceParts.map((sentencePart) => sentencePart.name === keyword.sentencePart.name))
+        console.log(templates, 'templates')
+        const filteredTemplates : SentenceTemplateEntity[] = []
+        for (const template of templates) {
+            for (const sentencePart of template.sentenceParts) {
+                if (sentencePart.name === keyword.sentencePart.name) {
+                    filteredTemplates.push(template)
+                    break
+                }
+            }
+        }
+        console.log(filteredTemplates, "----------------------------------------------------------------")
+        // const filteredTemplates = templates.filter((sentence) => sentence.sentenceParts.map((sentencePart) => sentencePart.name === keyword.sentencePart.name))
                 const randomTemplate = filteredTemplates[Math.floor(Math.random() * filteredTemplates.length)]
+
+                console.log(randomTemplate, 'template')
                 let foundSame = false
                 for(const sentencePart of randomTemplate.sentenceParts) {
-                    if ( sentencePart.name === keyword.sentencePart.name) {
+                    if ( sentencePart.name === keyword.sentencePart.name && !foundSame) {
                         foundSame = true
+                        continue
                     }
                     const keywords = await this.keywordsRepository.find({where: {sentencePart: sentencePart}}) 
+                    console.log(keywords, 'keywords', sentencePart, "sentencePart")
                     const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]  
                     sentence.keywords.push(randomKeyword)
                 }
                 sentence.category = keyword.category
+                console.log(sentence, "sentence")
                 user.sentences.push(sentence)
 
-                user.save()
-                sentence.save()
+                await user.save()
+                await sentence.save()
 
                 return sentence
     }

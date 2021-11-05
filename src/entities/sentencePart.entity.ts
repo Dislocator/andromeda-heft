@@ -19,6 +19,6 @@ export class SentencePartEntity extends AbstractEntity {
   @JoinTable()
   templates: SentenceTemplateEntity[];
 
-  @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart, {eager: true})
+  @OneToMany((type) => KeywordEntity, (keyword) => keyword.sentencePart)
   keywords: KeywordEntity[];
 }
