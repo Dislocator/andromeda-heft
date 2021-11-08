@@ -12,6 +12,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { SentenceTemplateModule } from './sentence-template/sentence-template.module';
 import { GoogleDocsConnectionModule } from './google-docs-connection/google-docs-connection.module';
 import { LessonsModule } from './lessons/lessons.module';
+import { WordsApiConnectionModule } from './words-api-connection/words-api-connection.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { LessonsModule } from './lessons/lessons.module';
     SentenceTemplateModule,
     GoogleDocsConnectionModule,
     LessonsModule,
+    WordsApiConnectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

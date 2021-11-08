@@ -22,7 +22,7 @@ async findAll() {
 async addSentencePart(data: SentencePartDTO) {
     try {
         const sentencePart = await this.sentencePartRepository.create(data)        
-        sentencePart.save()
+        await sentencePart.save()
         return sentencePart
     } catch (error) {
         throw new InternalServerErrorException(error)
