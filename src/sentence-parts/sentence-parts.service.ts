@@ -9,6 +9,9 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class SentencePartsService {  constructor(
+    @InjectRepository(KeywordEntity) private keywordsRepository: Repository<KeywordEntity>,
+    @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>,
+    @InjectRepository(CategoryEntity) private categoryRepository: Repository<CategoryEntity>,
     @InjectRepository(SentencePartEntity) private sentencePartRepository: Repository<SentencePartEntity>,
 ) {}
 async findAll() {
