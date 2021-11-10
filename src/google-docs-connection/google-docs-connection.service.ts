@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import{google} from 'googleapis'
-import { drive } from 'googleapis/build/src/apis/drive';
+// import { drive } from 'googleapis/build/src/apis/drive';
 import * as keys from './google-docs-keys.json';
 
 // const keys = require('./google-docs-keys.json')
@@ -18,19 +18,54 @@ export class GoogleDocsConnectionService {
     constructor(
       
     ) {
-       const client = new google.auth.JWT(
-            keys.client_email, null, keys.private_key, ['https://www.googleapis.com/auth/drive.file']
+       
+            
+    }
+    async zalepa(){
+        const client = new google.auth.JWT(
+            keys.client_email, null, keys.private_key, ['https://www.googleapis.com/auth/documents']
             )
-            client.authorize(function(err, tokens) {
-                if(err){
-                    console.log(err);
-                    return;
-                }
-                else{
-                    console.log('Zaebis')
-                    
-                }
-            })
+        client.authorize((err, tokens) => {
+           
+            if(err){
+                console.log(err);
+                return;
+            }
+            else{
+                 this.gsrun(client)
+                
+            }
+        })
+    }
+    async gsrun(cl) {
+        const docapi = google.docs({version: 'v1', auth: cl});
+    
+        const opt = {
+            documentId: "1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54",
+            
+        }
+
+        let data = await docapi.documents.get(opt)
+        console.log(data.data.body)
+        data.data.body.content[1].paragraph.elements[0].textRun = {content:"Получается бан"}
+        var updateObject = {
+            documentId: opt.documentId,
+            resource: {
+              requests: [{
+                insertText: {
+                  text: "Sameer Bayani",
+                  location: {
+                    index: 1, // Modified
+                  },
+                },
+              }],
+            },
+          };
+        
+        docapi.documents.batchUpdate(updateObject)
+        let document = await docapi.documents.create()
+        return data
+
     }
 }
 // import { Injectable, NotFoundException } from '@nestjs/common';
@@ -42,7 +77,7 @@ export class GoogleDocsConnectionService {
     // constructor() {
     //     const client =  new google.auth.JWT(
     //         keys.client_email, null,  keys.private_key,
-    //         ['https://www.googleapis.com/auth/documents']
+    //         
     //     )
 //         client.authorize((err, tokens) => {
 //             if (err) {
@@ -53,21 +88,6 @@ export class GoogleDocsConnectionService {
 //         })
 //     }
     
-//     async gsrun(cl) {
-//         const docapi = google.docs({version: 'v1', auth: cl});
-    
-//         const opt = {
-//             documentId: "",
-            
-//         }
 
-//         let data = await docapi.documents.get(opt)
-//         console.log(data)
-        
-//         let document = await docapi.documents.create()
-//         return data
-
-//     }
 
     
-// }

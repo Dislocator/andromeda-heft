@@ -9,12 +9,12 @@ export class GoogleDocsConnectionController {
         private googleDocsConnectionService: GoogleDocsConnectionService, 
         private httpService: HttpService,
         ){};
-
-        // @Get()
-        // async Dosomesing (){
-        //  this.googleDocsConnectionService.connect();
+        
+        @Get()
+        async Dosomesing (){
+         this.googleDocsConnectionService.zalepa();
           
-        // }
+        }
 }
 
 
