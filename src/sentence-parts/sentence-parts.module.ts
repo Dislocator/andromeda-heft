@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from 'src/auth/auth.module';
-import { CategoryEntity } from 'src/entities/category.entity';
-import { KeywordEntity } from 'src/entities/keyword.entity';
-import { SentencePartEntity } from 'src/entities/sentencePart.entity';
-import { UserEntity } from 'src/entities/user.entity';
+import { AuthModule } from '../auth/auth.module';
+import { CategoryEntity } from '../entities/category.entity';
+import { KeywordEntity } from '../entities/keyword.entity';
+import { SentencePartEntity } from '../entities/sentencePart.entity';
+import { UserEntity } from '../entities/user.entity';
 import { SentencePartsController } from './sentence-parts.controller';
 import { SentencePartsService } from './sentence-parts.service';
 

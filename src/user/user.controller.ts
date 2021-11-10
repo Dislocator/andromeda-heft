@@ -7,10 +7,10 @@ import {
   ValidationPipe,Get
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthService } from 'src/auth/auth.service';
-import { User } from 'src/auth/user.decorator';
-import { UserEntity } from 'src/entities/user.entity';
-import { UpdateUserDTO, UserInfoDTO } from 'src/models/user.model';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.decorator';
+import { UserEntity } from '../entities/user.entity';
+import { UpdateUserDTO, UserInfoDTO } from '../models/user.model';
 import { UserService } from './user.service';
 
 @Controller('user')

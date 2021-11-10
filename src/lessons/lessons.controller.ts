@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/auth/user.decorator';
-import { UserEntity } from 'src/entities/user.entity';
-import { CreateLessonDTO, UpdateLessonDTO } from 'src/models/lesson.dto';
+import { User } from '../auth/user.decorator';
+import { UserEntity } from '../entities/user.entity';
+import { CreateLessonDTO, UpdateLessonDTO } from '../models/lesson.dto';
 import { LessonsService } from './lessons.service';
 
 @Controller('lessons')

@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entities/user.entity';
-import { LoginDTO, RegisterDTO } from 'src/models/user.model';
+import { UserEntity } from '../entities/user.entity'
+import { LoginDTO, RegisterDTO } from '../models/user.model';
 import { Repository } from 'typeorm';
 import { JwtStrategy } from './strategy/jwt.strategy';
 
