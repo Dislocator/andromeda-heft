@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { CategoryDTO } from 'src/models/category.dto';
+import { CategoryDTO } from '../models/category.dto';
 import { CategoriesService } from './categories.service';
 
 @Controller('categories')

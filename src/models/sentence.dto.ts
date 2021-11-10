@@ -1,4 +1,4 @@
-import { KeywordEntity } from "src/entities/keyword.entity";
+import { KeywordEntity } from "../entities/keyword.entity";
 
 export class CreateSentenceDTO {
     words: KeywordEntity[]

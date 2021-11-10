@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { SentenceTemplateDTO } from 'src/models/sentenceTemplate.dto';
+import { SentenceTemplateDTO } from '../models/sentenceTemplate.dto';
 import { SentenceTemplateService } from './sentence-template.service';
 
 @Controller('sentence-template')

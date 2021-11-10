@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/auth/user.decorator';
-import { UserEntity } from 'src/entities/user.entity';
-import { CreateKeywordDTO, UpdateKeywordDTO } from 'src/models/keyword.dto';
-import { UpdateUserDTO } from 'src/models/user.model';
+import { User } from '../auth/user.decorator';
+import { UserEntity } from '../entities/user.entity';
+import { CreateKeywordDTO, UpdateKeywordDTO } from '../models/keyword.dto';
+import { UpdateUserDTO } from '../models/user.model';
 import { KeywordsService } from './keywords.service';
 @Controller('keywords')
 export class KeywordsController {

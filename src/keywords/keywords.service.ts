@@ -1,10 +1,10 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Categories, CategoryEntity } from 'src/entities/category.entity';
-import { KeywordEntity } from 'src/entities/keyword.entity';
-import { SentencePartEntity } from 'src/entities/sentencePart.entity';
-import { UserEntity } from 'src/entities/user.entity';
-import { CreateKeywordDTO, UpdateKeywordDTO } from 'src/models/keyword.dto';
+import { Categories, CategoryEntity } from '../entities/category.entity';
+import { KeywordEntity } from '../entities/keyword.entity';
+import { SentencePartEntity } from '../entities/sentencePart.entity';
+import { UserEntity } from '../entities/user.entity';
+import { CreateKeywordDTO, UpdateKeywordDTO } from '../models/keyword.dto';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { KeywordsModule } from './keywords.module';
 

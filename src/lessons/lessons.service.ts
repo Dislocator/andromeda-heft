@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CategoryEntity } from 'src/entities/category.entity';
-import { KeywordEntity } from 'src/entities/keyword.entity';
-import { LessonEntity } from 'src/entities/lesson.entity';
-import { SentencePartEntity } from 'src/entities/sentencePart.entity';
-import { UserEntity } from 'src/entities/user.entity';
-import { CreateLessonDTO, UpdateLessonDTO } from 'src/models/lesson.dto';
-import { SentencePartDTO } from 'src/models/sentencePart.dto';
+import { CategoryEntity } from '../entities/category.entity';
+import { KeywordEntity } from '../entities/keyword.entity';
+import { LessonEntity } from '../entities/lesson.entity';
+import { SentencePartEntity } from '../entities/sentencePart.entity';
+import { UserEntity } from '../entities/user.entity';
+import { CreateLessonDTO, UpdateLessonDTO } from '../models/lesson.dto';
+import { SentencePartDTO } from '../models/sentencePart.dto';
 import { Repository } from 'typeorm';
 
 @Injectable()

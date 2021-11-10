@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString,  } from "class-validator";
-import { SentenceParts } from "src/entities/sentencePart.entity";
+import { SentenceParts } from "../entities/sentencePart.entity";
 
 export class SentencePartDTO {
     @IsString()
