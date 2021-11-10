@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "andromeda-heft-331517",
+  "private_key_id": "2dd79949b65c6e5743e48c4579a5e0a9bb1e6849",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCCO8XRDWvfjiJK\nKMyPq9RI7milnj3ecEcovWZ8/4BrFyR61atewcJo8nwmTROF0Aj7pPCT+ECJnhN8\nTEHVvV1hEh683Sm25DM/H/sL4UZQmyBPiU8wUblmMJ8KAtLF4HLGS0L5+OdgmbAP\nr+6RLeq1YN+2AnbhY6PCCrt8OtYYtIs71qpQykPPhX2OZ/m7QdFoRYsrjmdSQ9V2\ndnaTzjBkUfA5Mq2Rnic44fXUd6Gj4fomSr/lEUv9hP8hs9alvd90tJIVFTHe5Wrh\nXFtQm2hTg7XInP3S72D6QywrJbmwH9Qk1acrWfmx+5U0waWIwoKh1BKoX7HdyAuh\nJhXFRdIZAgMBAAECggEAH94JczSiC1OHz3a5S4Sjzu7Lm48jm30E5JKn8/k/TrUc\nf5QuOWMXM7/2IhclKk60DAOZvNN301TjdrxgNbF/GoQpElTZ4r9nTNCCCS+oGYxD\n9UJnpq6wu7E1EWmMctAPtbbv3iQKVgh1XPlTWqIONzDLvQlQVqmfhhlDNExfXC7k\nMKLKVQ+Q6fArhoTqFjJk14jyMniSn0XnCjHydv0g50OPduO8AOWlbi051GMYWn01\nNuQaobsnY2D1L/fQsuVj+z0fn3VgVY1HBpR9kj+ELZ3TlKMAWVDl8rwMWZxkzAKh\n0iPA5cYBTRxWukkbSWNX3Q54w1V0IOnairNAZsh/yQKBgQC3qM67XNULkpAjWdYm\nVxKK0euqwQTugfhq0sCK6JPPlWpVdMezQQ+YzCcCY96unkNLmj4T375bDGdEBPi9\nzFMwbn2GwR3QyVjAJazq9hzykriaNtxJmSjrQvMMclKnMbMfrQWHOY88a06ujURs\nT6DCsNY2e2y5wxt7opL2SHxwtQKBgQC1h8r+MUyxSjb+xVow42YWCQNNarVSiRKa\n63eWlYAHa/6zQZXNQ2qb7sh41Gk01JpJ4Q74aL+kruzz/+iXMpqVmacqq9JpL9Ts\nwsPQYO0IbKQrW6B9Xqe3vUR4GhASEHoBXDoK5WXVFXs7nlIa0AiURECZRG+hHuml\n2QQEDbCOVQKBgHkc9weTlmLFSgwl6BTsgqvM9w5pryjhyMIZLSPtb9wKek7UbgUF\nuJVYu7jVxzl74IDwvFM6zzsXmNnANZBkN8/ObTT6EQFoZgCAV+GyXzCQFPCNkQNv\n3w4V3lWs5lifa7JN1UFxccW0NfTh7+dFM4xwNTNEfVSbF3qWoTeMYZOpAoGANA9k\nlO+4ieO5z+jzS6/7d/hPvSUMKUZsUoeS/VmUpQxAuFHnzz01VtDtJ1Hrdh4+vU9R\nBsarp2QPSo6quqnlkV/GhENQjaANFXVpyNnzQIY/sruNVEcQHG6oMzVuRG/7PWag\nsr1FLg4CEIAAFfZxb2v/hrUMuo1t/oU1VKBEcR0CgYBDGjBrP3+sWbn2fU+a6q3S\n7MBa5nnL0SJiuXpAllWPDvOtQlp0KtjlkCSTjwTPZ3405dfG8BGp56ccVmeIq/Zt\nszPgOKjpCxg6ZM2CAhT8/ZWzATDp22h6H8WYNATPTKv+l/k+LZFyNmLbCNnmwWzt\neJ+wbqoFOMpULA7HbXRFMg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dev-974@andromeda-heft-331517.iam.gserviceaccount.com",
+  "client_id": "107986672272768572051",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dev-974%40andromeda-heft-331517.iam.gserviceaccount.com"
+}
