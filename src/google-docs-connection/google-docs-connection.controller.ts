@@ -12,21 +12,13 @@ export class GoogleDocsConnectionController {
 
         // @Get()
         // async Dosomesing (){
-        //  let zelupa =  this.googleDocsConnectionService.сlientAuth();
-        //   return zelupa;
+        //  this.googleDocsConnectionService.connect();
+          
         // }
-        
-  
-
 }
 
 
-// @Get()
-//   @UseGuards(AuthGuard())
-//   async findCurrentUser(@User() {email}: UserEntity){
-//     const user = await this.authService.findCurrentUser(email)
-//     return user
-//   }
+
 
 
 
