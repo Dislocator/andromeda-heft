@@ -15,6 +15,11 @@ export class GoogleDocsConnectionController {
          this.googleDocsConnectionService.zalepa();
           
         }
+        @Get('a')
+        async Dosomesingwrong (){
+         this.googleDocsConnectionService.zalepaDrive();
+          
+        }
 }
 
 
