@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import{google} from 'googleapis'
+import {google} from 'googleapis'
 // import { drive } from 'googleapis/build/src/apis/drive';
 import * as keys from './google-docs-keys.json';
 import fs from 'fs';
 
 import readline from 'readline'
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['profile',
+'email',
+'https://www.googleapis.com/auth/drive',
+'https://www.googleapis.com/auth/drive.file',
+'https://www.googleapis.com/auth/drive.readonly',
+'https://www.googleapis.com/auth/drive.metadata.readonly',
+'https://www.googleapis.com/auth/drive.appdata',
+'https://www.googleapis.com/auth/drive.metadata',
+'https://www.googleapis.com/auth/drive.photos.readonly',];
 const TOKEN_PATH = 'token.json';
 
 
@@ -73,16 +81,17 @@ export class GoogleDocsConnectionService {
     }
     
 async zalepaDrive(){
-    fs.readFile("./src/google-docs-connection/google-docs-keys.json", (err, content) => {
+    fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
-        this.authorize(JSON.parse(content.toString()), this.listFiles);
+        // this.authorize(JSON.parse(content.toString()), this.listFiles);
+        this.authorize(JSON.parse(content.toString()), this.copyFile);
       });
 }
 
     async authorize(credentials, callback){
-        const {client_secret, client_id, redirect_uris} = credentials.installed;
+        const {client_secret, client_id, redirect_uris} = credentials.web;
         const oAuth2Client = new google.auth.OAuth2(
-            client_id, client_secret, redirect_uris[0]);
+            client_id, client_secret, "http://localhost:4000");
       
         // Check if we have previously stored a token.
         fs.readFile(TOKEN_PATH, (err, token) => {
@@ -121,6 +130,8 @@ async zalepaDrive(){
    
 
     async listFiles(auth) {
+
+        
         const drive = google.drive({version: 'v3', auth});
         drive.files.list({
           pageSize: 10,
@@ -138,7 +149,30 @@ async zalepaDrive(){
           }
         });
       }
-    }
+
+      async copyFile(auth){
+
+        const drive = google.drive({version: 'v3', auth});
+
+           await drive.files.copy({
+            fileId: '1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54',  
+           
+          })
+              .then(function(response) {
+                      // Handle the results here (response.result has the parsed body).
+                      console.log("Response", response);
+                    },
+                    function(err) { console.error("Execute error", err); });      
+                                  
+        }
+        // async clientCopy(){
+        //   google.load("client:auth2", function() {
+        //     google.auth2.init({client_id: keys.client_id });
+        }
+        
+
+
+    
 // import { Injectable, NotFoundException } from '@nestjs/common';
 // import {google} from 'googleapis'
 // import {keys} from '../keys.json'
