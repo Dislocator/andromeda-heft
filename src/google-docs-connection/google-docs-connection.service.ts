@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import {google} from 'googleapis'
+import {async} from 'async';
 // import { drive } from 'googleapis/build/src/apis/drive';
 import * as keys from './google-docs-keys.json';
 import fs from 'fs';
@@ -16,8 +17,17 @@ const SCOPES = ['profile',
 'https://www.googleapis.com/auth/drive.metadata',
 'https://www.googleapis.com/auth/drive.photos.readonly',];
 const TOKEN_PATH = 'token.json';
-
-
+var permissions = [
+  {
+    'type': 'user',
+    'role': 'writer',
+    'emailAddress': 'user@example.com'
+  }, {
+    'type': 'domain',
+    'role': 'writer',
+    'domain': 'example.com'
+  }
+];
 // async connection(cl){
 //     const gdapi = google.drive({version:'v3',cl})
 //     drive.
@@ -28,7 +38,7 @@ export class GoogleDocsConnectionService {
         
     ) {
    
-
+     
         
             
     }
@@ -158,17 +168,47 @@ async zalepaDrive(){
             fileId: '1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54',  
            
           })
-              .then(function(response) {
+              .then((response)=> {
+                      let newid = response.data.id;   
                       // Handle the results here (response.result has the parsed body).
                       console.log("Response", response);
+                       this.givepermission(newid,auth)
                     },
                     function(err) { console.error("Execute error", err); });      
-                                  
+                               
         }
-        // async clientCopy(){
-        //   google.load("client:auth2", function() {
-        //     google.auth2.init({client_id: keys.client_id });
+        async givepermission(fileId,auth){
+          const drive = google.drive({version: 'v3', auth});
+          async.eachSeries(permissions, function (permission, permissionCallback) {
+            drive.permissions.create({
+              resource: permission,
+              fileId: fileId,
+              fields: 'id',
+            }, function (err, res) {
+              if (err) {
+                // Handle error...
+                console.error(err);
+                permissionCallback(err);
+              } else {
+                console.log('Permission ID: ', res.id)
+                permissionCallback();
+              }
+            });
+          }, function (err) {
+            if (err) {
+              // Handle error
+              console.error(err);
+            } else {
+              // All permissions inserted
+            }
+          });
+          }
+         
+
         }
+
+
+        
         
 
 
