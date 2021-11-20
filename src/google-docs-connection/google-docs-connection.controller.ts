@@ -12,12 +12,12 @@ export class GoogleDocsConnectionController {
         
         @Get()
         async Dosomesing (){
-         this.googleDocsConnectionService.zalepa();
+         return this.googleDocsConnectionService.zalepa();
           
         }
         @Get('a')
         async Dosomesingwrong (){
-         this.googleDocsConnectionService.zalepaDrive();
+        return this.googleDocsConnectionService.zalepaDrive();
           
         }
 }

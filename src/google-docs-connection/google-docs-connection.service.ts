@@ -17,31 +17,20 @@ const SCOPES = ['profile',
 'https://www.googleapis.com/auth/drive.metadata',
 'https://www.googleapis.com/auth/drive.photos.readonly',];
 const TOKEN_PATH = 'token.json';
-var permissions = [
-  {
-    'type': 'user',
-    'role': 'writer',
-    'emailAddress': 'user@example.com'
-  }, {
-    'type': 'domain',
-    'role': 'writer',
-    'domain': 'example.com'
-  }
-];
-// async connection(cl){
-//     const gdapi = google.drive({version:'v3',cl})
-//     drive.
-// }
+var newid;
+
 @Injectable()
 export class GoogleDocsConnectionService {
     constructor(
         
     ) {
    
-     
+      
         
             
     }
+     
+    
     async zalepa(){
         const client = new google.auth.JWT(
             keys.client_email, null, keys.private_key, ['https://www.googleapis.com/auth/documents']
@@ -63,7 +52,7 @@ export class GoogleDocsConnectionService {
         const docapi = google.docs({version: 'v1', auth: cl});
     
         const opt = {
-            documentId: "1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54",
+            documentId: newid,
             
         }
 
@@ -91,11 +80,13 @@ export class GoogleDocsConnectionService {
     }
     
 async zalepaDrive(){
-    fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
+  let sho = fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
         // this.authorize(JSON.parse(content.toString()), this.listFiles);
-        this.authorize(JSON.parse(content.toString()), this.copyFile);
+         this.authorize(JSON.parse(content.toString()), this.copyFile);
+      
       });
+      console.log(sho);
 }
 
     async authorize(credentials, callback){
@@ -161,50 +152,36 @@ async zalepaDrive(){
       }
 
       async copyFile(auth){
-
+       
         const drive = google.drive({version: 'v3', auth});
 
            await drive.files.copy({
             fileId: '1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54',  
            
           })
+          
               .then((response)=> {
-                      let newid = response.data.id;   
+                      newid = response.data.id;  
                       // Handle the results here (response.result has the parsed body).
                       console.log("Response", response);
-                       this.givepermission(newid,auth)
-                    },
+                      drive.permissions.create({
+                        requestBody:{
+                          role: 'writer',
+                          type: 'anyone',
+                        },
+                        fileId: newid,
+                        fields: 'id',})
+                        
+                    }, 
                     function(err) { console.error("Execute error", err); });      
-                               
-        }
-        async givepermission(fileId,auth){
-          const drive = google.drive({version: 'v3', auth});
-          async.eachSeries(permissions, function (permission, permissionCallback) {
-            drive.permissions.create({
-              resource: permission,
-              fileId: fileId,
-              fields: 'id',
-            }, function (err, res) {
-              if (err) {
-                // Handle error...
-                console.error(err);
-                permissionCallback(err);
-              } else {
-                console.log('Permission ID: ', res.id)
-                permissionCallback();
-              }
-            });
-          }, function (err) {
-            if (err) {
-              // Handle error
-              console.error(err);
-            } else {
-              // All permissions inserted
-            }
-          });
-          }
-         
+                    const result = await drive.files.get({
+                      fileId: newid,
+                      fields: 'webViewLink, webContentLink',
 
+                    })   
+                    return result;        
+        }
+        
         }
 
 
@@ -213,25 +190,7 @@ async zalepaDrive(){
 
 
     
-// import { Injectable, NotFoundException } from '@nestjs/common';
-// import {google} from 'googleapis'
-// import {keys} from '../keys.json'
 
-// @Injectable()
-// export class DocsService {
-    // constructor() {
-    //     const client =  new google.auth.JWT(
-    //         keys.client_email, null,  keys.private_key,
-    //         
-    //     )
-//         client.authorize((err, tokens) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 this.gsrun(client)
-//             }
-//         })
-//     }
     
 
 
