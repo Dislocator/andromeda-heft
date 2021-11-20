@@ -80,13 +80,13 @@ export class GoogleDocsConnectionService {
     }
     
 async zalepaDrive(){
-  let sho = fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
+   fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);
         // this.authorize(JSON.parse(content.toString()), this.listFiles);
-         this.authorize(JSON.parse(content.toString()), this.copyFile);
+        this.authorize(JSON.parse(content.toString()), this.copyFile);
       
       });
-      console.log(sho);
+      
 }
 
     async authorize(credentials, callback){
@@ -156,7 +156,7 @@ async zalepaDrive(){
         const drive = google.drive({version: 'v3', auth});
 
            await drive.files.copy({
-            fileId: '1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54',  
+            fileId: '1NV-ijUa4roeHtYYs8BS365Q6B6Muski83LbsGyCuZwM',  
            
           })
           
