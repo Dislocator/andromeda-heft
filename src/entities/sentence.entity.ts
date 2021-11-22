@@ -20,7 +20,4 @@ export class SentenceEntity extends AbstractEntity {
   @JoinTable()
   users: UserEntity[];
 
-  @ManyToMany((type) => LessonEntity, (lesson) => lesson.sentences)
-  lessons: LessonEntity[];
-
 }

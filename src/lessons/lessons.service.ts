@@ -25,8 +25,14 @@ export class LessonsService {  constructor(
 
     async addLesson(data: CreateLessonDTO) {
         try {
-            const lesson = await this.lessonRepository.create(data)        
-            lesson.save()
+            const lesson = await this.lessonRepository.create({name: data.name})
+            for (const category of data.categories) {
+                const categoryToInsert = await this.categoryRepository.findOne({where: {name: category}, relations:['categories']})
+                if (categoryToInsert !== undefined) {
+                    lesson.categories.push(categoryToInsert)
+                }
+            }
+            await lesson.save()
             return lesson
         } catch (error) {
             throw new InternalServerErrorException(error)

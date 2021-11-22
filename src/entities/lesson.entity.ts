@@ -20,12 +20,7 @@ export class LessonEntity extends AbstractEntity {
     @JoinTable()
     categories: CategoryEntity[]
 
-    @ManyToMany((type) => KeywordEntity, (keyword) => keyword.lessons, {eager: true})
-    @JoinTable()
-    keywords: KeywordEntity[]
-
-    @ManyToMany((type) => SentenceEntity, (sentence) => sentence.lessons, {eager: true})
-    @JoinTable()
-    sentences: SentenceEntity[]
-
+    // @ManyToMany((type) => SentenceEntity, (sentence) => sentence.lessons, {eager: true})
+    // @JoinTable()
+    // sentences: SentenceEntity[]
 }

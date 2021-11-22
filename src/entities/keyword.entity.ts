@@ -27,6 +27,4 @@ export class KeywordEntity extends AbstractEntity {
   @JoinTable()
   users: UserEntity[];
 
-  @ManyToMany((type) => LessonEntity, (lesson) => lesson.keywords)
-  lessons: LessonEntity[];
 }
