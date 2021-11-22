@@ -14,14 +14,17 @@ import { WordsApiConnectionService } from './words-api-connection.service';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-        KeywordEntity,
-        UserEntity,
-        CategoryEntity,
-        SentencePartEntity,
-        SentenceEntity
-    ]), AuthModule, HttpModule
+      KeywordEntity,
+      UserEntity,
+      CategoryEntity,
+      SentencePartEntity,
+      SentenceEntity,
+    ]),
+    AuthModule,
+    HttpModule,
   ],
   controllers: [WordsApiConnectionController],
-  providers: [WordsApiConnectionService]
+  providers: [WordsApiConnectionService],
+  exports: [WordsApiConnectionService],
 })
 export class WordsApiConnectionModule {}

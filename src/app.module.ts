@@ -13,6 +13,7 @@ import { SentenceTemplateModule } from './sentence-template/sentence-template.mo
 import { GoogleDocsConnectionModule } from './google-docs-connection/google-docs-connection.module';
 import { LessonsModule } from './lessons/lessons.module';
 import { WordsApiConnectionModule } from './words-api-connection/words-api-connection.module';
+import { DatamuseApiConnectionModule } from './datamuse-api-connection/datamuse-api-connection.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { WordsApiConnectionModule } from './words-api-connection/words-api-conne
     GoogleDocsConnectionModule,
     LessonsModule,
     WordsApiConnectionModule,
+    DatamuseApiConnectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
