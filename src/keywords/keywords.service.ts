@@ -24,6 +24,7 @@ export class KeywordsService {
     }
 
     async addKeyword(user: UserEntity, data:CreateKeywordDTO) {
+
         const keyword = await this.keywordsRepository.create({word: data.word.toLowerCase()})
         
         const category = await this.categoryRepository.findOne({where: {name: data.category}})

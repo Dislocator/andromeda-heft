@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from 'src/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { UserEntity } from 'src/entities/user.entity';
+import { FacebookStrategy } from './strategy/facebook.strategy';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy,FacebookStrategy],
   controllers: [AuthController],
   exports: [JwtStrategy, AuthService, PassportModule],
 })

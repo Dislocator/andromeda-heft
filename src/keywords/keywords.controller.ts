@@ -4,11 +4,13 @@ import { User } from 'src/auth/user.decorator';
 import { UserEntity } from 'src/entities/user.entity';
 import { CreateKeywordDTO, UpdateKeywordDTO } from 'src/models/keyword.dto';
 import { UpdateUserDTO } from 'src/models/user.model';
+import { WordsApiConnectionService } from 'src/words-api-connection/words-api-connection.service';
 import { KeywordsService } from './keywords.service';
 @Controller('keywords')
 export class KeywordsController {
     constructor(
         private keywordsService: KeywordsService,
+        private wordsApiConnectionService: WordsApiConnectionService,
     ){}
 
     @Get()
