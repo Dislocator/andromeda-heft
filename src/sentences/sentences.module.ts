@@ -11,6 +11,7 @@ import { SentenceTemplateEntity } from '../entities/sentenceTemplate.entity';
 import { AuthModule } from '../auth/auth.module';
 import { DatamuseApiConnectionModule } from 'src/datamuse-api-connection/datamuse-api-connection.module';
 import { WordsApiConnectionModule } from 'src/words-api-connection/words-api-connection.module';
+import { TranslatorApiConnectionModule } from '../translator-api-connection/translator-api-connection.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { WordsApiConnectionModule } from 'src/words-api-connection/words-api-con
     AuthModule,
     DatamuseApiConnectionModule,
     WordsApiConnectionModule,
+    TranslatorApiConnectionModule
   ],
   providers: [SentencesService],
   controllers: [SentencesController],

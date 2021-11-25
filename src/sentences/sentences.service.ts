@@ -13,10 +13,12 @@ import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { DatamuseApiConnectionService } from 'src/datamuse-api-connection/datamuse-api-connection.service';
 import { WordsApiConnectionService } from 'src/words-api-connection/words-api-connection.service';
+import { TranslatorApiConnectionService } from '../translator-api-connection/translator-api-connection.service';
 
 @Injectable()
 export class SentencesService {
   constructor(
+    private translatorApiConnectionService: TranslatorApiConnectionService,
     private datamuseApiConnectionService: DatamuseApiConnectionService,
     private wordsApiConnectionService: WordsApiConnectionService,
     @InjectRepository(KeywordEntity)
@@ -234,4 +236,10 @@ export class SentencesService {
     user.sentences.filter((sentence) => sentence.id != Number(id));
     return user.sentences;
   }
+
+  async reworkSentence(sentence: string) {
+    let words = sentence.split(' ')
+    
+  }
+
 }

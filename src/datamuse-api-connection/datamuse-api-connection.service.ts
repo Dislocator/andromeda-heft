@@ -13,4 +13,12 @@ export class DatamuseApiConnectionService {
     );
     return res;
   }
+  /* returns part of speech of given word
+  n - noun, v - verb, adj - adjective */
+  async getPartOfSpeech(word) {
+    const options = `sp=${word}$md=p&max=1`
+    const res = await this.sendData(options)
+    const partOfSpeech = res.tags[0]
+    return partOfSpeech
+  }
 }

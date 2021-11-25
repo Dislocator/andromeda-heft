@@ -14,6 +14,7 @@ import { GoogleDocsConnectionModule } from './google-docs-connection/google-docs
 import { LessonsModule } from './lessons/lessons.module';
 import { WordsApiConnectionModule } from './words-api-connection/words-api-connection.module';
 import { DatamuseApiConnectionModule } from './datamuse-api-connection/datamuse-api-connection.module';
+import { TranslatorApiConnectionModule } from './translator-api-connection/translator-api-connection.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { DatamuseApiConnectionModule } from './datamuse-api-connection/datamuse-
     LessonsModule,
     WordsApiConnectionModule,
     DatamuseApiConnectionModule,
+    TranslatorApiConnectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
