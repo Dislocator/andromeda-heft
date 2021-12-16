@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import{google} from 'googleapis'
+import {google} from 'googleapis'
+import {async} from 'async';
 // import { drive } from 'googleapis/build/src/apis/drive';
 import * as keys from './google-docs-keys.json';
+import fs from 'fs';
 
-// const keys = require('./google-docs-keys.json')
+import readline from 'readline'
 
+const SCOPES = ['profile',
+'email',
+'https://www.googleapis.com/auth/drive',
+'https://www.googleapis.com/auth/drive.file',
+'https://www.googleapis.com/auth/drive.readonly',
+'https://www.googleapis.com/auth/drive.metadata.readonly',
+'https://www.googleapis.com/auth/drive.appdata',
+'https://www.googleapis.com/auth/drive.metadata',
+'https://www.googleapis.com/auth/drive.photos.readonly',];
+const TOKEN_PATH = 'token.json';
+var newid;
 
-
-
-
-// async connection(cl){
-//     const gdapi = google.drive({version:'v3',cl})
-//     drive.
-// }
 @Injectable()
 export class GoogleDocsConnectionService {
     constructor(
-      
+        
     ) {
-       
+   
+      
+        
             
     }
+     
+    
     async zalepa(){
         const client = new google.auth.JWT(
             keys.client_email, null, keys.private_key, ['https://www.googleapis.com/auth/documents']
@@ -34,6 +44,7 @@ export class GoogleDocsConnectionService {
             else{
                  this.gsrun(client)
                 
+                
             }
         })
     }
@@ -41,7 +52,7 @@ export class GoogleDocsConnectionService {
         const docapi = google.docs({version: 'v1', auth: cl});
     
         const opt = {
-            documentId: "1A_OuTBAxhWYtpsNZTKCEhdAjk62IymGCMRk5PgdOT54",
+            documentId: newid,
             
         }
 
@@ -67,26 +78,119 @@ export class GoogleDocsConnectionService {
         return data
 
     }
+    
+async zalepaDrive(){
+   fs.readFile("./src/google-docs-connection/client_secret.json", (err, content) => {
+        if (err) return console.log('Error loading client secret file:', err);
+        // this.authorize(JSON.parse(content.toString()), this.listFiles);
+        this.authorize(JSON.parse(content.toString()), this.copyFile);
+      
+      });
+      
 }
-// import { Injectable, NotFoundException } from '@nestjs/common';
-// import {google} from 'googleapis'
-// import {keys} from '../keys.json'
 
-// @Injectable()
-// export class DocsService {
-    // constructor() {
-    //     const client =  new google.auth.JWT(
-    //         keys.client_email, null,  keys.private_key,
-    //         
-    //     )
-//         client.authorize((err, tokens) => {
-//             if (err) {
-//                 console.log(err);
-//             } else {
-//                 this.gsrun(client)
-//             }
-//         })
-//     }
+    async authorize(credentials, callback){
+        const {client_secret, client_id, redirect_uris} = credentials.web;
+        const oAuth2Client = new google.auth.OAuth2(
+            client_id, client_secret, "http://localhost:4000");
+      
+        // Check if we have previously stored a token.
+        fs.readFile(TOKEN_PATH, (err, token) => {
+          if (err) return this.getAccessToken(oAuth2Client, callback);
+          oAuth2Client.setCredentials(JSON.parse(token.toString()));
+          callback(oAuth2Client);
+        });
+    }
+
+
+
+    async getAccessToken(oAuth2Client, callback) {
+        const authUrl = oAuth2Client.generateAuthUrl({
+          access_type: 'offline',
+          scope: SCOPES,
+        });
+        console.log('Authorize this app by visiting this url:', authUrl);
+        const rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout,
+        });
+        rl.question('Enter the code from that page here: ', (code) => {
+          rl.close();
+          oAuth2Client.getToken(code, (err, token) => {
+            if (err) return console.error('Error retrieving access token', err);
+            oAuth2Client.setCredentials(token);
+            // Store the token to disk for later program executions
+            fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+              if (err) return console.error(err);
+              console.log('Token stored to', TOKEN_PATH);
+            });
+            callback(oAuth2Client);
+          });
+        });
+      }
+   
+
+    async listFiles(auth) {
+
+        
+        const drive = google.drive({version: 'v3', auth});
+        drive.files.list({
+          pageSize: 10,
+          fields: 'nextPageToken, files(id, name)',
+        }, (err, res) => {
+          if (err) return console.log('The API returned an error: ' + err);
+          const files = res.data.files;
+          if (files.length) {
+            console.log('Files:');
+            files.map((file) => {
+              console.log(`${file.name} (${file.id})`);
+            });
+          } else {
+            console.log('No files found.');
+          }
+        });
+      }
+
+      async copyFile(auth){
+       
+        const drive = google.drive({version: 'v3', auth});
+
+           await drive.files.copy({
+            fileId: '1NV-ijUa4roeHtYYs8BS365Q6B6Muski83LbsGyCuZwM',  
+           
+          })
+          
+              .then((response)=> {
+                      newid = response.data.id;  
+                      // Handle the results here (response.result has the parsed body).
+                      console.log("Response", response);
+                      drive.permissions.create({
+                        requestBody:{
+                          role: 'writer',
+                          type: 'anyone',
+                        },
+                        fileId: newid,
+                        fields: 'id',})
+                        
+                    }, 
+                    function(err) { console.error("Execute error", err); });      
+                    const result = await drive.files.get({
+                      fileId: newid,
+                      fields: 'webViewLink, webContentLink',
+
+                    })   
+                    return result;        
+        }
+        
+        }
+
+
+        
+        
+
+
+    
+
     
 
 
